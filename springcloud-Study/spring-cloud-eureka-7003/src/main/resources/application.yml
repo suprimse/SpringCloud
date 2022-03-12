@@ -1,0 +1,19 @@
+server:
+  port: 7003
+#配置Eureka
+eureka:
+  instance:
+    hostname: eureka7003.com
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      #还是要去改了好 不改只有一盒localhost
+      #这里的注册地址只有第一个地址生效了，后面的地址没有生效，找到这样一个说法：
+      #
+      #eureka内部逻辑调用查询第一个非回环地址方法，
+      #需要进入window/system32/drivers/etc/hosts文件配置主机名（域名）==>127.0.0.1空格localhost
+      #回环地址因为你用他做集群注册所以要显性配置出来，我没有配置，所以三个都是localhost，所以此是一个问题点；
+
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
